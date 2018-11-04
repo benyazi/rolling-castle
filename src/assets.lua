@@ -11,8 +11,10 @@ local function sound(name, fp)
 end
 
 function assets.load()
-   image('image1', 'assets/sprites/image.png')
-   sound('sound1', 'assets/sounds/sound.wav')
+   image('terrain_grass', 'assets/sprites/grass_001.png')
+   image('good1', 'assets/sprites/good1.png')
+   image('prayer1_main', 'assets/sprites/tailsetminion_2.png')
+   --sound('sound1', 'assets/sounds/sound.wav')
 end
 
 return assets

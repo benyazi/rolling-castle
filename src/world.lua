@@ -32,6 +32,15 @@ function m:addEntity(e)
         self.physics:add(e, x, y, e.size.w, e.size.h)
       end
    end
+    if e.collider and e.transform and not self.physics:hasItem(e) then
+        local x, y = e.transform.position.x, e.transform.position.y
+        if e.collider then
+            local colliderX, colliderY = (e.transform.position.x - e.collider.w/2 + e.collider.offset.x),(e.transform.position.y-e.collider.h + e.collider.offset.y)
+            self.physics:add(e, colliderX, colliderY, e.collider.w, e.collider.h)
+        else
+            self.physics:add(e, x, y, e.size.w, e.size.h)
+        end
+    end
    self.entities[e] = e
    return self.world:addEntity(e)
 end
@@ -51,7 +60,7 @@ function m:addSystem(s)
 end
 
 function m:notifyChange(e)
-   require('src.systems.SpriteSystem').modified = true
+   require('src.systems.draw.SpriteRenderDraw').modified = true
    return self:addEntity(e)
 end
 

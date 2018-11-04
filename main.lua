@@ -12,6 +12,8 @@ world = require 'src.world'
 assets = require 'src.assets'
 
 STATE = {MOVING=1, IDLE=2}
+FAITH_STATE = {IDLE=1,ATTACK=2,DEFENSE=3}
+MAGIC_STATE = {IDLE=1,USING=2}
 DIR = {DOWN=1, LEFT=2, UP=3, RIGHT=4}
 CAM = gamera.new(0, 0, 2000, 2000)
 ENV = 'prod'
@@ -23,7 +25,16 @@ local systems = require.tree('src.systems')
 local TerrainManager = require 'src.terrain.TerrainManager'
 
 world = world:new(
-    bump.newWorld(32)
+    bump.newWorld(32),
+    systems.CheckVisibleSystem,
+    systems.AnimationStateTrackingSystem,
+    systems.draw.SpriteTerrainDraw,
+    systems.draw.SpriteRenderDraw,
+    systems.KeyboardMovingSystem,
+    systems.magic.UseMagicSystem,
+    systems.prayer.CheckFaithLevelSystem,
+    systems.prayer.FollowToTaurusSystem,
+    systems.CameraFollowingSystem
 --systems.SpriteSystem,
 )
 
@@ -34,6 +45,16 @@ function love.load()
     assets.load()
     TerrainManager.createMap(32, 32)
     world:addEntity({soundManager=true})
+
+    local player = entities.players.player:new(100,100)
+    world:addEntity(player)
+
+    for i=0,10 do
+        local pX = math.random(150, 400)
+        local pY = math.random(150, 400)
+        local prayer = entities.prayers.prayer:new(pX,pY)
+        world:addEntity(prayer)
+    end
 end
 
 function love.draw()
@@ -50,8 +71,16 @@ function love.keypressed(k)
     if k == 'o' then
         if ENV == 'dev' then
             ENV = 'prod'
+            world:removeSystem(systems.dev.PrintPivotPointSystem)
+            world:removeSystem(systems.dev.PrintLinkLogSystem)
+            world:removeSystem(systems.dev.PrintColliderSystem)
+            world:removeSystem(systems.dev.PrintFaithSystem)
         else
             ENV = 'dev'
+            world:addSystem(systems.dev.PrintPivotPointSystem)
+            world:addSystem(systems.dev.PrintLinkLogSystem)
+            world:addSystem(systems.dev.PrintColliderSystem)
+            world:addSystem(systems.dev.PrintFaithSystem)
         end
     elseif k == 'w' then
         beholder.trigger('MOVING_UP_PRESSED')
@@ -61,6 +90,8 @@ function love.keypressed(k)
         beholder.trigger('MOVING_LEFT_PRESSED')
     elseif k == 'd' then
         beholder.trigger('MOVING_RIGHT_PRESSED')
+    elseif k == 'space' then
+        beholder.trigger('SPACE_PRESSED')
     end
 end
 
@@ -73,5 +104,7 @@ function love.keyreleased(k)
         beholder.trigger('MOVING_LEFT_RELEASED')
     elseif k == 'd' then
         beholder.trigger('MOVING_RIGHT_RELEASED')
+    elseif k == 'space' then
+        beholder.trigger('SPACE_RELEASED')
     end
 end
