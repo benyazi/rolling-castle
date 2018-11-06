@@ -14,6 +14,8 @@ function assets.load()
    image('terrain_grass', 'assets/sprites/grass_001.png')
    image('good1', 'assets/sprites/good1.png')
    image('prayer1_main', 'assets/sprites/tailsetminion_2.png')
+   image('Wagon1_main', 'assets/sprites/wagon.png')
+   image('Willage_main', 'assets/sprites/Bonfire.png')
    --sound('sound1', 'assets/sounds/sound.wav')
 end
 

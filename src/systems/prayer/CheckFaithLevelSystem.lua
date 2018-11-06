@@ -10,24 +10,25 @@ function system:process(e)
     local distance = math.sqrt ( dx * dx + dy * dy )
     if distance < 110 then
         if e.Faith.current < e.Faith.calculateMax then
-            e.Faith.current = e.Faith.current + 0.1
+            e.Faith.current = e.Faith.current + 0.3
         end
     elseif distance < 150 then
         if e.Faith.current > 0 then
-            e.Faith.current = e.Faith.current - 0.1
+            e.Faith.current = e.Faith.current - 0.05
         end
     elseif distance < 200 then
         if e.Faith.current > 0 then
-            e.Faith.current = e.Faith.current - 0.2
+            e.Faith.current = e.Faith.current - 0.1
         end
     else
         if e.Faith.current > 0 then
-            e.Faith.current = e.Faith.current - 0.3
+            e.Faith.current = e.Faith.current - 0.15
         end
     end
     if e.Faith.current <= 0 then
         e.Faith.current = 0
         e.GoldenTaurus = nil
+        e.goToMotherLand = true
     end
     world:notifyChange(e)
 end

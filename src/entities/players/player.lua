@@ -11,6 +11,8 @@ function Player:new(x, y)
             w = 32, h = 32
         }
     }
+    --wagon
+    p.wagon = nil
     --Some components
     p.speed = 2
     p.keyboardControlled = true

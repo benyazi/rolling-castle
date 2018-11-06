@@ -1,6 +1,6 @@
 local system = tiny.processingSystem()
 
-system.filter = tiny.requireAll('GoldenTaurus','faithState')
+system.filter = tiny.requireAll('goToMotherLand','motherland')
 
 system.dirs = {}
 system.dirs[DIR.UP] = false
@@ -9,8 +9,8 @@ system.dirs[DIR.LEFT] = false
 system.dirs[DIR.RIGHT] = false
 
 function system:process(e)
-    if e.faithState == FAITH_STATE.IDLE and e.GoldenTaurus then
-        local taurusX,taurusY = e.GoldenTaurus.transform.position.x,e.GoldenTaurus.transform.position.y
+    if e.goToMotherLand then
+        local taurusX,taurusY = e.motherland.transform.position.x,e.motherland.transform.position.y
         local new_x, new_y = e.transform.position.x,e.transform.position.y
         --local distance = math.abs((meX - taurusX)^2) + math.abs((meY - taurusY)^2)
         --distance = math.sqrt(distance)
@@ -23,7 +23,7 @@ function system:process(e)
         system.dirs[DIR.DOWN] = false
         system.dirs[DIR.LEFT] = false
         system.dirs[DIR.RIGHT] = false
-        if(distance > e.faithMinDistance) then
+        if(distance > 50) then
             if dx > 10 then
                 system.dirs[DIR.LEFT] = true
             elseif dx < 10 then

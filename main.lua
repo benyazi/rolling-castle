@@ -32,8 +32,12 @@ world = world:new(
     systems.draw.SpriteRenderDraw,
     systems.KeyboardMovingSystem,
     systems.magic.UseMagicSystem,
+    systems.magic.GetEatSystem,
     systems.prayer.CheckFaithLevelSystem,
+    systems.prayer.EatingSystem,
     systems.prayer.FollowToTaurusSystem,
+    systems.prayer.FollowToMotherLandSystem,
+    systems.village.GranarySystem,
     systems.CameraFollowingSystem
 --systems.SpriteSystem,
 )
@@ -47,12 +51,19 @@ function love.load()
     world:addEntity({soundManager=true})
 
     local player = entities.players.player:new(100,100)
+    local wagon = entities.resources.wagon:new(120,120)
+    wagon.GoldenTaurus = player
     world:addEntity(player)
+    player.wagon = wagon
+    world:addEntity(wagon)
 
+    local village = entities.prayers.village:new(310,310)
+    world:addEntity(village)
     for i=0,10 do
         local pX = math.random(150, 400)
         local pY = math.random(150, 400)
         local prayer = entities.prayers.prayer:new(pX,pY)
+        prayer.motherland = village
         world:addEntity(prayer)
     end
 end
@@ -75,12 +86,18 @@ function love.keypressed(k)
             world:removeSystem(systems.dev.PrintLinkLogSystem)
             world:removeSystem(systems.dev.PrintColliderSystem)
             world:removeSystem(systems.dev.PrintFaithSystem)
+            world:removeSystem(systems.dev.PrintEatSystem)
+            world:removeSystem(systems.dev.PrintWagonStatSystem)
+            world:removeSystem(systems.dev.PrintGranarySystem)
         else
             ENV = 'dev'
             world:addSystem(systems.dev.PrintPivotPointSystem)
             world:addSystem(systems.dev.PrintLinkLogSystem)
             world:addSystem(systems.dev.PrintColliderSystem)
             world:addSystem(systems.dev.PrintFaithSystem)
+            world:addSystem(systems.dev.PrintEatSystem)
+            world:addSystem(systems.dev.PrintWagonStatSystem)
+            world:addSystem(systems.dev.PrintGranarySystem)
         end
     elseif k == 'w' then
         beholder.trigger('MOVING_UP_PRESSED')
@@ -90,6 +107,8 @@ function love.keypressed(k)
         beholder.trigger('MOVING_LEFT_PRESSED')
     elseif k == 'd' then
         beholder.trigger('MOVING_RIGHT_PRESSED')
+    elseif k == 'e' then
+        beholder.trigger('GET_EAT_PRESSED')
     elseif k == 'space' then
         beholder.trigger('SPACE_PRESSED')
     end
@@ -104,6 +123,8 @@ function love.keyreleased(k)
         beholder.trigger('MOVING_LEFT_RELEASED')
     elseif k == 'd' then
         beholder.trigger('MOVING_RIGHT_RELEASED')
+    elseif k == 'e' then
+        beholder.trigger('GET_EAT_RELEASED')
     elseif k == 'space' then
         beholder.trigger('SPACE_RELEASED')
     end
