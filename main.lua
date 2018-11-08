@@ -31,6 +31,7 @@ world = world:new(
     systems.AnimationStateTrackingSystem,
     systems.draw.SpriteTerrainDraw,
     systems.draw.SpriteRenderDraw,
+    systems.castle.ShowCastleResourcesSystem,
     systems.KeyboardMovingSystem,
     systems.magic.UseMagicSystem,
     systems.magic.GetEatSystem,
@@ -39,7 +40,8 @@ world = world:new(
     systems.prayer.FollowToTaurusSystem,
     systems.prayer.FollowToMotherLandSystem,
     systems.village.GranarySystem,
-    systems.CameraFollowingSystem
+    systems.CameraFollowingSystem,
+    systems.castle.CheckResourceSystem
 --systems.SpriteSystem,
 )
 
@@ -51,8 +53,10 @@ function love.load()
     TerrainManager.createMap(32, 32)
     world:addEntity({soundManager=true})
 
-    local player = entities.players.player:new(100,100)
-    local wagon = entities.resources.wagon:new(120,120)
+    local player = entities.players.player:new(100,400)
+    local wagon = entities.resources.wagon:new(120,420)
+    local castle = entities.castle.castle:new(448,224)
+    world:addEntity(castle)
     wagon.GoldenTaurus = player
     world:addEntity(player)
     player.wagon = wagon

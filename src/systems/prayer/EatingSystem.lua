@@ -27,9 +27,34 @@ function system:process(e)
             e.goToMotherLand = true
         end
         world:notifyChange(e)
+    elseif e.inCastle then
+        local castle = e.inCastle
+        if e.satiety >= 100 then
+            e.satiety = e.satiety - e.appetite/4
+        else
+            if castle.resources.eat.current > e.appetite/4 then
+                castle.resources.eat.current = castle.resources.eat.current - e.appetite/4
+                e.satiety = e.satiety + e.appetite/4
+                world:notifyChange(castle)
+                world:notifyChange(e)
+            else
+                e.satiety = e.satiety - e.appetite/2
+                world:notifyChange(e)
+            end
+        end
+        if e.satiety <= 0 then
+            e.satiety = 0
+            castle.resources.prayers.current = castle.resources.prayers.current - 1
+            e.inCastle = nil
+            e.checkCollision = true
+            e.goToMotherLand = true
+            world:notifyChange(castle)
+            world:notifyChange(e)
+        end
     else
         if e.satiety < 100 then
             e.satiety = e.satiety + e.appetite/2
+            world:notifyChange(e)
         end
     end
 end

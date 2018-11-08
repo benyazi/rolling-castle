@@ -16,6 +16,9 @@ function Prayer:new(x, y)
     p.motherland = nil
     p.goToMotherLand = nil
 
+    --Castle
+    p.inCastle = nil
+
     --Faith components
     p.Faith = {
         current = 0,

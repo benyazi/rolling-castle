@@ -17,7 +17,7 @@ function Wagon:new(x, y)
     p.eat = {
         calculateMax = 1000,
         max = 1000,
-        current = 801
+        current = 100
     }
     --Some components
     p.speed = math.random(1.25, 1.5)

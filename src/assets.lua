@@ -12,6 +12,8 @@ end
 
 function assets.load()
    image('terrain_grass', 'assets/sprites/grass_001.png')
+   image('terrain_water', 'assets/sprites/water_001.png')
+   image('terrain_wall', 'assets/sprites/wall_001.png')
    image('good1', 'assets/sprites/good1.png')
    image('prayer1_main', 'assets/sprites/tailsetminion_2.png')
    image('Wagon1_main', 'assets/sprites/wagon.png')
