@@ -1,6 +1,6 @@
 local system = tiny.processingSystem()
 
-system.filter = tiny.requireAll('GoldenTaurus','faithState','Faith')
+system.filter = tiny.requireAll('satiety','faithState','Faith')
 
 function system:process(e)
     if e.GoldenTaurus then
@@ -27,6 +27,10 @@ function system:process(e)
             e.goToMotherLand = true
         end
         world:notifyChange(e)
+    else
+        if e.satiety < 100 then
+            e.satiety = e.satiety + e.appetite/2
+        end
     end
 end
 

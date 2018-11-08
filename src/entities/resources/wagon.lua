@@ -3,6 +3,7 @@ local Wagon = {}
 function Wagon:new(x, y)
     p = {}
     p.type = 'Wagon'
+    p.wagon = true
     --Transform component
     p.transform = {
         position = {
@@ -16,7 +17,7 @@ function Wagon:new(x, y)
     p.eat = {
         calculateMax = 1000,
         max = 1000,
-        current = 1000
+        current = 801
     }
     --Some components
     p.speed = math.random(1.25, 1.5)
@@ -62,9 +63,13 @@ function Wagon:new(x, y)
     spriteBody.sprite.states = {};
     spriteBody.sprite.states[STATE.IDLE] = {}
     spriteBody.sprite.states[STATE.MOVING] = {}
-    spriteBody.sprite.states[STATE.IDLE][DIR.DOWN] = anim8.newAnimation(g('1-1',1),0.5)
-    spriteBody.sprite.states[STATE.MOVING][DIR.DOWN] = anim8.newAnimation(g('1-2',1),0.5)
-    spriteBody.sprite.current = spriteBody.sprite.states[STATE.IDLE][DIR.DOWN]
+    spriteBody.sprite.states[STATE.IDLE][WAGON_STATE.FULL] = anim8.newAnimation(g('1-1',1),0.5)
+    spriteBody.sprite.states[STATE.MOVING][WAGON_STATE.FULL] = anim8.newAnimation(g('1-2',1),0.5)
+    spriteBody.sprite.states[STATE.IDLE][WAGON_STATE.MIDDLE] = anim8.newAnimation(g('1-1',2),0.5)
+    spriteBody.sprite.states[STATE.MOVING][WAGON_STATE.MIDDLE] = anim8.newAnimation(g('1-2',2),0.5)
+    spriteBody.sprite.states[STATE.IDLE][WAGON_STATE.EMPTY] = anim8.newAnimation(g('1-1',3),0.5)
+    spriteBody.sprite.states[STATE.MOVING][WAGON_STATE.EMPTY] = anim8.newAnimation(g('1-2',3),0.5)
+    spriteBody.sprite.current = spriteBody.sprite.states[STATE.IDLE][WAGON_STATE.FULL]
 
     p.spriteRender:addSprite(spriteBody)
 

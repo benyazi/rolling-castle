@@ -14,6 +14,7 @@ assets = require 'src.assets'
 STATE = {MOVING=1, IDLE=2}
 FAITH_STATE = {IDLE=1,ATTACK=2,DEFENSE=3}
 MAGIC_STATE = {IDLE=1,USING=2}
+WAGON_STATE = {FULL=1,MIDDLE=2,EMPTY=3}
 DIR = {DOWN=1, LEFT=2, UP=3, RIGHT=4}
 CAM = gamera.new(0, 0, 2000, 2000)
 ENV = 'prod'
@@ -56,15 +57,19 @@ function love.load()
     world:addEntity(player)
     player.wagon = wagon
     world:addEntity(wagon)
-
-    local village = entities.prayers.village:new(310,310)
-    world:addEntity(village)
     for i=0,10 do
-        local pX = math.random(150, 400)
-        local pY = math.random(150, 400)
-        local prayer = entities.prayers.prayer:new(pX,pY)
-        prayer.motherland = village
-        world:addEntity(prayer)
+        local vX,vY = i*10 + math.random(50, 1700),i*10 + math.random(300, 1700)
+        local village = entities.prayers.village:new(
+                vX,vY
+        )
+        world:addEntity(village)
+        for i=0,10 do
+            local pX = vX + math.random(-150, 150)
+            local pY = vY + math.random(-150, 150)
+            local prayer = entities.prayers.prayer:new(pX,pY)
+            prayer.motherland = village
+            world:addEntity(prayer)
+        end
     end
 end
 
