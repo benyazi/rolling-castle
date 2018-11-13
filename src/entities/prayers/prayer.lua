@@ -25,7 +25,6 @@ function Prayer:new(x, y)
         max = 100,
         calculateMax = 100
     }
-    p.GoldenTaurus = nil
     p.faithState = FAITH_STATE.IDLE
     p.faithMinDistance = 100
 
@@ -34,7 +33,7 @@ function Prayer:new(x, y)
     p.appetite = 0.1
 
     --Some components
-    p.speed = math.random(1.25, 1.5)
+    p.speed = 1.25
     p.checkCollision = true
     p.hasCollider = true
 

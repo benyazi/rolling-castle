@@ -29,6 +29,7 @@ function system:process(e)
         e.Faith.current = 0
         e.GoldenTaurus = nil
         e.goToMotherLand = true
+        e.target = e.motherland
     end
     world:notifyChange(e)
 end

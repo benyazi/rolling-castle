@@ -37,8 +37,8 @@ world = world:new(
     systems.magic.GetEatSystem,
     systems.prayer.CheckFaithLevelSystem,
     systems.prayer.EatingSystem,
-    systems.prayer.FollowToTaurusSystem,
-    systems.prayer.FollowToMotherLandSystem,
+    systems.FollowTargetSystem,
+    systems.VelocityToMove,
     systems.village.GranarySystem,
     systems.CameraFollowingSystem,
     systems.castle.CheckResourceSystem
@@ -57,10 +57,11 @@ function love.load()
     local wagon = entities.resources.wagon:new(120,420)
     local castle = entities.castle.castle:new(448,224)
     world:addEntity(castle)
-    wagon.GoldenTaurus = player
+    wagon.target = player
     world:addEntity(player)
     player.wagon = wagon
     world:addEntity(wagon)
+
     for i=0,10 do
         local vX,vY = i*10 + math.random(50, 1700),i*10 + math.random(300, 1700)
         local village = entities.prayers.village:new(

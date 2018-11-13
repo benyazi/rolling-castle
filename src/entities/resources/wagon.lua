@@ -20,11 +20,10 @@ function Wagon:new(x, y)
         current = 100
     }
     --Some components
-    p.speed = math.random(1.25, 1.5)
+    p.speed = 2
     p.checkCollision = true
     p.hasCollider = true
 
-    p.GoldenTaurus = nil
     p.faithState = FAITH_STATE.IDLE
     p.faithMinDistance = 50
     --Health component

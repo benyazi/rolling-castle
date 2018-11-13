@@ -26,6 +26,7 @@ function system:process(e)
                     items[index].Faith.current = items[index].Faith.calculateMax
                     items[index].goToMotherLand = nil
                     items[index].GoldenTaurus = e
+                    items[index].target = e
                     print("Found prayer")
                 end
                 world:notifyChange(items[index])

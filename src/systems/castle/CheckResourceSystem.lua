@@ -16,6 +16,7 @@ function system:process(e)
                 items[index].goToMotherLand = nil
                 items[index].inCastle = e
                 items[index].GoldenTaurus = nil
+                items[index].target = e
                 items[index].checkCollision = nil
                 e.resources.prayers.current = e.resources.prayers.current + 1
                 world:notifyChange(items[index])
