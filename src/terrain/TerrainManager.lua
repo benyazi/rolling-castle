@@ -22,10 +22,10 @@ function m.createMap(TileW, TileH)
                   w = TileW, h = TileH,
                   offset = { x = 0, y = 0 }
               },
-              pos = {x=j*TileW,y=i*TileH},
+              pos = {x=j*TileW,y=i*TileH, z = 1},
               hasCollider = true
           }
-          if (i == 30 or i == 31) and (j < 50 or j > 106) then
+          if (j < 3) or (j > 152) then
               terBlock.type = 'water'
               terBlock.spriteDraw.sprite = assets.terrain_water
               terBlock.checkCollision = true
@@ -36,9 +36,7 @@ function m.createMap(TileW, TileH)
               --terBlock.checkCollision = true
               world:addEntity(terBlock)
           end
-          if (i==20 and j>=50 and j <=106)
-                  or (i > 20 and i < 40 and (j ==50 or j == 106))
-                  or (i == 40 and ((j>=50 and j < 70) or ( j>80 and j <=106)))
+          if ( j > 2 and j < 153 and i > 20 and i < 23)
           then
               local terBlock2 = {
                   type = "wall",
@@ -54,7 +52,7 @@ function m.createMap(TileW, TileH)
                       w = TileW, h = TileH,
                       offset = { x = 0, y = 0 }
                   },
-                  pos = {x=j*TileW,y=i*TileH},
+                  pos = {x=j*TileW,y=i*TileH, z = 10},
                   hasCollider = true,
                   checkCollision = true
               }

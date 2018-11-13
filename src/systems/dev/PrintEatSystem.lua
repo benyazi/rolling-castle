@@ -1,7 +1,7 @@
 local system = tiny.processingSystem()
 
 
-system.filter = tiny.requireAll('satiety')
+system.filter = tiny.requireAll('satiety', 'isVisible')
 system.isDrawSystem = true
 
 function system:process(e, dt)

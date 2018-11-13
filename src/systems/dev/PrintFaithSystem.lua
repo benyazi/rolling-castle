@@ -1,7 +1,7 @@
 local system = tiny.processingSystem()
 
 
-system.filter = tiny.requireAll('GoldenTaurus','faithState','Faith')
+system.filter = tiny.requireAll('GoldenTaurus','faithState','Faith', 'isVisible')
 system.isDrawSystem = true
 
 function system:process(e, dt)

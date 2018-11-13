@@ -1,7 +1,7 @@
 local system = tiny.processingSystem()
 
 
-system.filter = tiny.requireAll('pivot')
+system.filter = tiny.requireAll('pivot', 'isVisible')
 system.isDrawSystem = true
 
 function system:process(e, dt)

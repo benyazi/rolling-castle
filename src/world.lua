@@ -23,7 +23,7 @@ function m:addEntity(e)
        end
       end
       if e.collider then
-        local colliderX, colliderY = (e.pos.x - e.collider.w/2 + e.collider.offset.x),(e.pos.y-e.collider.h + e.collider.offset.y)
+        local colliderX, colliderY = (e.pos.x + e.collider.offset.x),(e.pos.y + e.collider.offset.y)
         self.physics:add(e, colliderX, colliderY, e.collider.w, e.collider.h)
         if e.spriteDraw.anim then
           print("HERO X:"..e.pos.x.." Y:"..e.pos.y.." COL_X:"..colliderX.." COL_Y:"..colliderY.." COL_W:"..e.collider.w.." COL_H:"..e.collider.h)
@@ -35,7 +35,7 @@ function m:addEntity(e)
     if e.collider and e.transform and not self.physics:hasItem(e) then
         local x, y = e.transform.position.x, e.transform.position.y
         if e.collider then
-            local colliderX, colliderY = (e.transform.position.x - e.collider.w/2 + e.collider.offset.x),(e.transform.position.y-e.collider.h + e.collider.offset.y)
+            local colliderX, colliderY = (e.transform.position.x + e.collider.offset.x),(e.transform.position.y + e.collider.offset.y)
             self.physics:add(e, colliderX, colliderY, e.collider.w, e.collider.h)
         else
             self.physics:add(e, x, y, e.size.w, e.size.h)

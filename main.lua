@@ -28,6 +28,7 @@ local TerrainManager = require 'src.terrain.TerrainManager'
 world = world:new(
     bump.newWorld(32),
     systems.CheckVisibleSystem,
+    systems.CheckVisibleUnitsSystem,
     systems.AnimationStateTrackingSystem,
     systems.draw.SpriteTerrainDraw,
     systems.draw.SpriteRenderDraw,
@@ -55,8 +56,16 @@ function love.load()
 
     local player = entities.players.player:new(100,1300)
     local wagon = entities.resources.wagon:new(120,1340)
-    local castle = entities.castle.castle:new(2496,992)
+
+    local castle = entities.castle.castle:new(500,736)
     world:addEntity(castle)
+    local castle2 = entities.castle.castle:new(1750,736)
+    world:addEntity(castle2)
+    local castle3 = entities.castle.castle:new(3250,736)
+    world:addEntity(castle3)
+    local castle4 = entities.castle.castle:new(4500,736)
+    world:addEntity(castle4)
+
     wagon.GoldenTaurus = player
     world:addEntity(player)
     player.wagon = wagon
@@ -94,6 +103,7 @@ function love.keypressed(k)
             world:removeSystem(systems.dev.PrintPivotPointSystem)
             world:removeSystem(systems.dev.PrintLinkLogSystem)
             world:removeSystem(systems.dev.PrintColliderSystem)
+            world:removeSystem(systems.dev.PrintTerrainColliderSystem)
             world:removeSystem(systems.dev.PrintFaithSystem)
             world:removeSystem(systems.dev.PrintEatSystem)
             world:removeSystem(systems.dev.PrintWagonStatSystem)
@@ -103,6 +113,7 @@ function love.keypressed(k)
             world:addSystem(systems.dev.PrintPivotPointSystem)
             world:addSystem(systems.dev.PrintLinkLogSystem)
             world:addSystem(systems.dev.PrintColliderSystem)
+            world:addSystem(systems.dev.PrintTerrainColliderSystem)
             world:addSystem(systems.dev.PrintFaithSystem)
             world:addSystem(systems.dev.PrintEatSystem)
             world:addSystem(systems.dev.PrintWagonStatSystem)

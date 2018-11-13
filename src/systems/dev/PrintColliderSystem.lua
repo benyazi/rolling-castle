@@ -1,12 +1,11 @@
 local system = tiny.processingSystem()
 
-
-system.filter = tiny.requireAll('hasCollider','pos')
+system.filter = tiny.requireAll('hasCollider','transform', 'isVisible')
 system.isDrawSystem = true
 
 function system:process(e, dt)
   love.graphics.setColor(0,255,0)
-  local x, y = e.pos.x, e.pos.y
+  local x, y = e.transform.position.x, e.transform.position.y
   local w,h = 0,0
   if e.size then
     w,h = e.size.w,e.size.h
@@ -20,8 +19,8 @@ function system:process(e, dt)
     end
   end
   if e.collider then
-    x = x - e.collider.w/2
-    y = y - e.collider.h
+    x = x-- - e.collider.w/2
+    y = y-- - e.collider.h
     w,h = e.collider.w,e.collider.h
   end
   love.graphics.rectangle("line",x,y,w,h)

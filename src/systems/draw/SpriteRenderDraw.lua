@@ -1,4 +1,4 @@
-local system = tiny.processingSystem()
+local system = tiny.sortedProcessingSystem()
 
 system.filter = tiny.requireAll('spriteRender', 'transform', 'isVisible')
 system.isDrawSystem = true
