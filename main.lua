@@ -16,7 +16,7 @@ FAITH_STATE = {IDLE=1,ATTACK=2,DEFENSE=3}
 MAGIC_STATE = {IDLE=1,USING=2}
 WAGON_STATE = {FULL=1,MIDDLE=2,EMPTY=3}
 DIR = {DOWN=1, LEFT=2, UP=3, RIGHT=4}
-CAM = gamera.new(0, 0, 2000, 2000)
+CAM = gamera.new(0, 0, 4992, 4992)
 ENV = 'prod'
 
 entities = require.tree('src.entities')
@@ -53,16 +53,16 @@ function love.load()
     TerrainManager.createMap(32, 32)
     world:addEntity({soundManager=true})
 
-    local player = entities.players.player:new(100,400)
-    local wagon = entities.resources.wagon:new(120,420)
-    local castle = entities.castle.castle:new(448,224)
+    local player = entities.players.player:new(100,1300)
+    local wagon = entities.resources.wagon:new(120,1340)
+    local castle = entities.castle.castle:new(2496,992)
     world:addEntity(castle)
     wagon.GoldenTaurus = player
     world:addEntity(player)
     player.wagon = wagon
     world:addEntity(wagon)
     for i=0,10 do
-        local vX,vY = i*10 + math.random(50, 1700),i*10 + math.random(300, 1700)
+        local vX,vY = i*10 + math.random(300, 3500),i*10 + math.random(1300, 3500)
         local village = entities.prayers.village:new(
                 vX,vY
         )

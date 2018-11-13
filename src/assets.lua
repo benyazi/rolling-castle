@@ -18,6 +18,7 @@ function assets.load()
    image('prayer1_main', 'assets/sprites/tailsetminion_2.png')
    image('Wagon1_main', 'assets/sprites/wagon.png')
    image('Willage_main', 'assets/sprites/Bonfire.png')
+   image('archerGun', 'assets/sprites/archer-0001.png')
    --sound('sound1', 'assets/sounds/sound.wav')
 end
 

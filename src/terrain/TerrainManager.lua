@@ -2,7 +2,7 @@ local Perlin = require 'src.terrain.perlin'
 local m = {}
 
 function m.createMap(TileW, TileH)
-  Perlin:init(65,65)
+  Perlin:init(156,156)
   local perlinMap = Perlin:getMap()
   --local order = 1
   for i = 0, #perlinMap.n do
@@ -25,7 +25,7 @@ function m.createMap(TileW, TileH)
               pos = {x=j*TileW,y=i*TileH},
               hasCollider = true
           }
-          if (i == 6 or i == 7) and (j < 10 or j > 25) then
+          if (i == 30 or i == 31) and (j < 50 or j > 106) then
               terBlock.type = 'water'
               terBlock.spriteDraw.sprite = assets.terrain_water
               terBlock.checkCollision = true
@@ -36,9 +36,9 @@ function m.createMap(TileW, TileH)
               --terBlock.checkCollision = true
               world:addEntity(terBlock)
           end
-          if (i==4 and j>=10 and j <=25)
-                  or (i > 4 and i < 10 and (j ==10 or j == 25))
-                  or (i == 10 and ((j>=10 and j < 13) or ( j>17 and j <=25)))
+          if (i==20 and j>=50 and j <=106)
+                  or (i > 20 and i < 40 and (j ==50 or j == 106))
+                  or (i == 40 and ((j>=50 and j < 70) or ( j>80 and j <=106)))
           then
               local terBlock2 = {
                   type = "wall",

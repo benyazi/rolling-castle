@@ -52,6 +52,7 @@ function Prayer:new(x, y)
 
     p.dir = DIR.DOWN
     p.state = STATE.IDLE
+    p.attackState = STATE.IDLE
 
     p.collider = {
         w = 20, h = 10,
@@ -102,6 +103,28 @@ function Prayer:new(x, y)
     spriteFoot.sprite.current = spriteFoot.sprite.states[STATE.IDLE][DIR.DOWN]
     p.spriteRender:addSprite(spriteFoot)
     p.spriteRender:addSprite(spriteBody)
+
+    local spriteGun = {
+        type = 'anim',
+        state = "state",
+        sprite = {},
+        position = {
+            x = 0, y = 0,
+            offsetX = 0, offsetY = 0,
+        },
+        size = {
+            w = 32, y = 32
+        }
+    }
+    local g2 = anim8.newGrid(32, 32, assets.archerGun:getWidth(), assets.archerGun:getHeight())
+    spriteGun.sprite.file = assets.archerGun;
+    spriteGun.sprite.states = {};
+    spriteGun.sprite.states[STATE.IDLE] = {}
+    spriteGun.sprite.states[STATE.MOVING] = {}
+    spriteGun.sprite.states[STATE.IDLE][DIR.DOWN] = anim8.newAnimation(g2('1-1',1),0.5)
+    spriteGun.sprite.states[STATE.MOVING][DIR.DOWN] = anim8.newAnimation(g2('1-2',1),0.5)
+    spriteGun.sprite.current = spriteFoot.sprite.states[STATE.IDLE][DIR.DOWN]
+    p.spriteRender:addSprite(spriteGun)
 
     p.isVisible = true
 
