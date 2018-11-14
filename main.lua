@@ -25,6 +25,32 @@ local systems = require.tree('src.systems')
 
 local TerrainManager = require 'src.terrain.TerrainManager'
 
+function vector_sum(a, b)
+   return {x = a.x + b.x, y = a.y + b.y}
+end
+
+function vector_diff(a, b)
+   return {x = a.x - b.x, y = a.y - b.y}
+end
+
+function vector_len(v)
+   return math.sqrt(v.x^2 + v.y^2)
+end
+
+function vector_norm(v)
+   local l = vector_len(v)
+   return {x = v.x / l, y = v.y / l}
+end
+
+function vector_mul(v, n)
+   return {x = v.x * n, y = v.y * n}
+end
+
+
+function vector_div(v, n)
+   return {x = v.x / n, y = v.y / n}
+end
+
 world = world:new(
     bump.newWorld(32),
     systems.CheckVisibleSystem,
@@ -38,6 +64,7 @@ world = world:new(
     systems.prayer.CheckFaithLevelSystem,
     systems.prayer.EatingSystem,
     systems.FollowTargetSystem,
+    systems.AvoidObstacleSystem,
     systems.VelocityToMove,
     systems.village.GranarySystem,
     systems.CameraFollowingSystem,

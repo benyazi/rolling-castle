@@ -3,30 +3,6 @@ local system = tiny.processingSystem()
 system.filter = tiny.requireAll('target')
 
 
-local function vector_diff(a, b)
-   return {x = a.x - b.x, y = a.y - b.y}
-end
-
-local function vector_len(v)
-   return math.sqrt(v.x^2 + v.y^2)
-end
-
-
-local function vector_norm(v)
-   local l = vector_len(v)
-   return {x = v.x / l, y = v.y / l}
-end
-
-
-local function vector_mul(v, n)
-   return {x = v.x * n, y = v.y * n}
-end
-
-
-local function vector_div(v, n)
-   return {x = v.x / n, y = v.y / n}
-end
-
 
 local ok_radius = 100
 local flee_radius = 50
