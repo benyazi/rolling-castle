@@ -100,6 +100,7 @@ function love.load()
             local pY = vY + math.random(-150, 150)
             local prayer = entities.prayers.prayer:new(pX,pY)
             prayer.motherland = village
+            prayer.target = village
             world:addEntity(prayer)
         end
     end

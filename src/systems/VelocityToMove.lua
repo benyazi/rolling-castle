@@ -7,9 +7,10 @@ function system:process(e)
 
    if vel.x == 0 and vel.y == 0 then
       e.state = STATE.IDLE
+   else
+      e.state = STATE.MOVING
    end
 
-   e.state = STATE.MOVING
    local new_x = e.transform.position.x + vel.x
    local new_y = e.transform.position.y + vel.y
    if e.hasCollider ~= nil and e.checkCollision ~= nil then

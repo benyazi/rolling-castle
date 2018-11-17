@@ -1,6 +1,6 @@
 local system = tiny.processingSystem()
 
-system.filter = tiny.requireAll('velocity')
+system.filter = tiny.requireAll('speed')
 
 
 local ok_radius = 100
@@ -10,6 +10,7 @@ local time_to_target = 0.25
 
 function system:process(e)
    -- TODO: add walls avoiding code
+   if e.keyboardControlled then return end
     local targets = world.physics:queryRect(
        e.transform.position.x - 50, e.transform.position.y - 50,
        100, 100,
@@ -29,7 +30,7 @@ function system:process(e)
           world:notifyChange(e)
        end
     end
-    e.velocity = vector_sum(e.velocity, nv)
+    e.velocity = vector_sum(e.velocity or {x=0, y=0}, nv)
 end
 
 return system
